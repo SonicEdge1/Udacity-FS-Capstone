@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actor List</title>
+</head>
+<body>
+    <h1>Actors</h1>
+    <div id="actors"></div>
+    <script>
+        //how can this bypass any authentication?
+	    fetch('http://127.0.0.1:5000/actors', { method: 'get'})
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+                // console.log(data)
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("actors");
+            console.log(data.actors[0])
+            for (var i = 0; i < data.actors.length; i++) {
+                var div = document.createElement("div");
+                num = 1 + i
+                div.innerHTML = '<br>' + "Actor " + num + '<br>' + "Id: " + data.actors[i].id + '<br>' +'Name: ' + data.actors[i].name
+                + '<br>' + 'Gender: ' + data.actors[i].gender + '<br>' + 'Age:   ' + data.actors[i].age;
+                mainContainer.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>

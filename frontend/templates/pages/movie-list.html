@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+</head>
+<body>
+    <h1>Movies</h1>
+    <div id="movies"></div>
+    <script>
+        // this bypasses authentication permissions
+	    fetch('http://127.0.0.1:5000/movies', { method: 'get'})
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+                // console.log(data)
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("movies");
+            // console.log(data.movies[0])
+            for (var i = 0; i < data.movies.length; i++) {
+                // console.log('iteration')
+                num = i + 1
+                var div = document.createElement("div");
+                div.innerHTML = '<br>' + "Movie " + num + '<br>' + "Id: " + data.movies[i].id + '<br>' +'Title: ' + data.movies[i].title
+                + '<br>' + 'Release Date: ' + data.movies[i].releaseDate;
+                // div.innerHTML = "<pre>"+ "Movie " + i + "  " + JSON.stringify(data.movies[i] ,undefined, 2) +"</pre>" + "<pre>"+JSON.stringify(data.movies[0].releaseDate ,undefined, 2) +"</pre>"
+                mainContainer.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>

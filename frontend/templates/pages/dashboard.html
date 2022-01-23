@@ -1,0 +1,17 @@
+<div class="logged-in-box auth0-box logged-in">
+    <h1>Welcome to Joe's Casting App</h1>
+    <h2 id="logo"><img src="https://res.cloudinary.com/dvlbqrvsj/image/upload/c_scale,w_500/v1642707744/film-career_bwo2rz.png" /></h2>
+    <img class="avatar" src="{{userinfo['picture']}}"/>
+    <h2>You are now logged in</h2>
+    <h2>Welcome {{userinfo['name']}}</h2>
+    <pre>{{userinfo_pretty}}</pre>
+    <div>
+        <a class="btn btn-primary btn-lg btn-logout btn-block" href="/movies">Movies</a>
+    </div>
+    <div>
+        <a class="btn btn-primary btn-lg btn-logout btn-block" href="/actors">Actors</a>
+    </div>
+    <div>
+        <a class="btn btn-primary btn-lg btn-logout btn-block" href="/logout">Logout</a>
+    </div>
+</div>
