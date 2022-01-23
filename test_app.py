@@ -3,8 +3,8 @@ import unittest
 import json
 import random
 import string
-import http_response_status_codes as Codes
-from api import create_app
+import codes as Codes
+from app import create_app
 from authlib.integrations.flask_client import OAuth
 from database.models import setup_db, Movie, Actor, actor_bookings
 from datetime import date

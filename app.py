@@ -1,15 +1,21 @@
 import os
-from flask import Flask, request, abort, jsonify, session, \
-  redirect, render_template, url_for
+from flask import Flask, request, abort, jsonify, session, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_cors import CORS
 from datetime import date
-import http_response_status_codes as Codes
+import codes as Codes
 from database.models import setup_db, Actor, Movie, actor_bookings, AuthError
 from auth.auth import AuthError, requires_auth, requires_basic_auth
+
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
+
+from dotenv import load_dotenv, find_dotenv
+from functools import wraps
+from os import environ as env
+
+
 
 AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
@@ -28,7 +34,7 @@ database_filename = "database.db"
 
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__, template_folder='../frontend/templates')
+    app = Flask(__name__, template_folder='templates')
     # ???? is this the correct place for this?
     setup_db(app, database_filename)
     app.secret_key = SECRET_KEY
@@ -57,7 +63,7 @@ def create_app(test_config=None):
     ###############################
     @app.route('/home')
     def home():
-        return render_template('pages/home.html')
+        return render_template('home.html')
 
     @app.route('/login')
     def login():
@@ -91,7 +97,7 @@ def create_app(test_config=None):
     @requires_basic_auth("")
     def dashboard(payload):
         return render_template(
-            'pages/dashboard.html',
+            'dashboard.html',
             userinfo=session['profile'],
             userinfo_pretty=json.dumps(
                 session['jwt_payload'],
@@ -115,12 +121,12 @@ def create_app(test_config=None):
     @app.route('/movie-list')
     @requires_auth('get:actors-and-movies')
     def movie_list(payload):
-        return render_template('pages/movie-list.html')
+        return render_template('movie-list.html')
 
     @app.route('/actor-list')
     @requires_auth('get:actors-and-movies')
     def actor_list(payload):
-        return render_template('pages/actor-list.html')
+        return render_template('actor-list.html')
 
     @app.route('/')
     def test_alive():
