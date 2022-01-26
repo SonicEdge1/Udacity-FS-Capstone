@@ -20,12 +20,12 @@ from os import environ as env
 AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
 AUTH0_API_BASE_URL = os.getenv('AUTH0_API_BASE_URL')
-AUTH0_CALLBACK_URL = os.getenv('AUTH0_CALLBACK_URL')
+AUTH0_CALLBACK_URL = os.getenv('AUTH0_REMOTE_CALLBACK_URL')  # comment this line to run loacally
+# AUTH0_CALLBACK_URL = os.getenv('AUTH0_CALLBACK_URL')       # uncomment this line for running locally
 AUTH0_API_AUDIENCE = os.getenv('AUTH0_API_AUDIENCE')
 
 
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
-AUTH0_LOCALCALLBACK_URL = os.getenv('AUTH0_LOCALCALLBACK_URL')
 SESSION_TYPE = 'sqlalchemy'
 SESSION_KEY = os.getenv('SESSION_KEY')
 SECRET_KEY = os.getenv('SECRET_KEY')
