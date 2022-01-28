@@ -1,5 +1,6 @@
 import os
-from flask import Flask, request, abort, jsonify, session, redirect, render_template, url_for
+from flask import Flask, request, abort, jsonify, session, \
+    redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_cors import CORS
