@@ -19,19 +19,20 @@ Heroku_Host = "ec2-52-1-20-236.compute-1.amazonaws.com:5432"
 Heroku_DBname = "d23cmcbfab52ss"
 Heroku_User = "xibzplxukrsyqb"
 Heroku_Password = "ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb"
+Heroku_URI = "postgres://xibzplxukrsyqb:ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb@ec2-52-1-20-236.compute-1.amazonaws.com:5432/d23cmcbfab52ss"
 
 db = SQLAlchemy()
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-def setup_db(app, database_filename=database_filename):
-    database_path = "sqlite:///{}".format(
-       Heroku_User,
-       Heroku_Password,
-       Heroku_Host,
-       Heroku_DBname
-   )
+def setup_db(app, database_path=Heroku_URI):
+#     database_path = "sqlite:///{}".format(
+#        Heroku_User,
+#        Heroku_Password,
+#        Heroku_Host,
+#        Heroku_DBname
+#    )
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
