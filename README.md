@@ -177,7 +177,27 @@ GET '/actors/{int:actor_id}'
 * Curl: `curl 'http://127.0.0.1:5000/actors/1' --header 'Authorization: Bearer {BearerToken}'`
 * Sample Return:
 ```
-
+{
+  "actor": {
+    "age": 90, 
+    "gender": "Male", 
+    "id": 2, 
+    "name": "Sean Connery"
+  }, 
+  "cast_in": [
+    {
+      "id": 6, 
+      "releaseDate": "1981-11-06", 
+      "title": "Time Bandits"
+    }, 
+    {
+      "id": 7, 
+      "releaseDate": "1996-06-07", 
+      "title": "The Rock"
+    }
+  ], 
+  "success": true
+}
 ```
 POST '/actors'  
 
@@ -282,7 +302,40 @@ GET '/movies/{int:movie_id}'
 * Curl: `curl 'http://127.0.0.1:5000/movies/1' --header 'Authorization: Bearer {BearerToken}'`
 * Sample Return:
 ```
-
+{
+  "movie": {
+    "id": 6, 
+    "releaseDate": "1981-11-06", 
+    "title": "Time Bandits"
+  }, 
+  "movie_cast": [
+    {
+      "age": 90, 
+      "gender": "Male", 
+      "id": 2, 
+      "name": "Sean Connery"
+    }, 
+    {
+      "age": 60, 
+      "gender": "Male", 
+      "id": 3, 
+      "name": "Jack Purvis"
+    }, 
+    {
+      "age": 51, 
+      "gender": "Female", 
+      "id": 4, 
+      "name": "Shelley Duvall"
+    }, 
+    {
+      "age": 60, 
+      "gender": "Male", 
+      "id": 5, 
+      "name": "John Cleese"
+    }
+  ], 
+  "success": true
+}
 ```
 PATCH '/moives/{int:movie_id}'  
 
