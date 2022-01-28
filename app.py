@@ -156,7 +156,7 @@ def create_app(test_config=None):
             'total_actors': len(Actor.query.all()),
         }), Codes.OK
         # except Exception as e:
-            abort(Codes.UNPROCESSABLE_ENTITY)
+            # abort(Codes.UNPROCESSABLE_ENTITY)
 
     @app.route('/actors/<int:actor_id>', methods=['GET'])
     @requires_auth('get:actors-and-movies')
