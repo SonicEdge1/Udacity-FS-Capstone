@@ -147,15 +147,15 @@ def create_app(test_config=None):
     @app.route('/actors', methods=['GET'])
     @requires_auth('get:actors-and-movies')
     def get_actors(payload):
-        try:
-            all_actors = Actor.query.all()
-            actors = [actor.format() for actor in all_actors]
-            return jsonify({
-                'success': True,
-                'actors': actors,
-                'total_actors': len(Actor.query.all()),
-            }), Codes.OK
-        except Exception as e:
+        # try:
+        all_actors = Actor.query.all()
+        actors = [actor.format() for actor in all_actors]
+        return jsonify({
+            'success': True,
+            'actors': actors,
+            'total_actors': len(Actor.query.all()),
+        }), Codes.OK
+        # except Exception as e:
             abort(Codes.UNPROCESSABLE_ENTITY)
 
     @app.route('/actors/<int:actor_id>', methods=['GET'])
