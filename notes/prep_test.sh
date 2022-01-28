@@ -2,21 +2,19 @@
 # must execute the script in context of the calling shell, ie.
 # . prep_test.sh
 
-export AUTH0_API_BASE_URL=https://joes-casting-agency.us.auth0.com
-export AUTH0_CLIENT_ID=OhcNdLC90mi5E0R77RlC526RP1Khrl7q
-export AUTH0_CLIENT_SECRET=aRBc0oGvvYq2tLDk89736MFh4Kky68yoPWNvYYGKSJVsaD97bkesz4tE_mUS1dso
-
 export FLASK_APP=backend/api.py
 export FLASK_ENV=development
-export 
-export AUTH0_CLIENT_ID=OhcNdLC90mi5E0R77RlC526RP1Khrl7q
-export AUTH0_CLIENT_SECRET='aRBc0oGvvYq2tLDk89736MFh4Kky68yoPWNvYYGKSJVsaD97bkesz4tE_mUS1dso'
+
+export AUTH0_ALGORITHMS = ['RS256']
+export AUTH0_API_AUDIENCE='CastingAgencyAPI'
 export AUTH0_API_BASE_URL=https://joes-casting-agency.us.auth0.com
 export AUTH0_CALLBACK_URL=http://127.0.0.1:5000/callback
-export AUTH0_API_AUDIENCE='CastingAgencyAPI'
-export 
+export AUTH0_CLIENT_ID=OhcNdLC90mi5E0R77RlC526RP1Khrl7q
+export AUTH0_CLIENT_SECRET='aRBc0oGvvYq2tLDk89736MFh4Kky68yoPWNvYYGKSJVsaD97bkesz4tE_mUS1dso'
 export AUTH0_DOMAIN=joes-casting-agency.us.auth0.com
-export AUTH0_ALGORITHMS = ['RS256']
+
+export 
+export 
 export 
 export SECRET_KEY ='aRBc0oGvvYq2VsaD97bkesz4tE_mUS1dso'
 export SESSION_KEY="access_token"

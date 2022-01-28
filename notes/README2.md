@@ -127,7 +127,7 @@ header:  {('Authorization', 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6
 
 header:  {('Content-Type', 'application/json'), ('Authorization', 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjNYYW5ieVliZHBoTmUyTFB4bC1nSSJ9.eyJpc3MiOiJodHRwczovL2pvZXMtY2FzdGluZy1hZ2VuY3kudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxZGYxNjkzYTFlM2FjMDA2OWVhMGZiOSIsImF1ZCI6WyJDYXN0aW5nQWdlbmN5QVBJIiwiaHR0cHM6Ly9qb2VzLWNhc3RpbmctYWdlbmN5LnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2NDIwMTAzNzYsImV4cCI6MTY0MjYxNTE3NiwiYXpwIjoiT2hjTmRMQzkwbWk1RTBSNzdSbEM1MjZSUDFLaHJsN3EiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9yIiwiZGVsZXRlOm1vdmllIiwiZ2V0OmFjdG9ycy1hbmQtbW92aWVzIiwiZ2V0OmRhc2hib2FyZCIsInBhdGNoOmFjdG9ycy1hbmQtbW92aWVzIiwicG9zdDphY3RvciIsInBvc3Q6bW92aWUiXX0.OuDG77ThXxK-zv83Da4SQb65ASBJe9cixGwLpgV1Pf5NZWX6eBNqaQ8hNIEGdxxBsIjHSLMLEpfZR8b4ztbqoePsuLuIbSiEMRnOD2MQvAFifT8mled9nvZDDy8UjPYdE9qetH4eHb49n9TI-ceEbjAS-lTCw_X2viepiZ92PPjXAIedAyg7QoqDar1oH1_5hxqFdR5fHjuR5fh2huywXsA6Lw8B6T0D0k8FvxzmsQraFUc7dkH7FejtqZjysYkO8fT8mtSBxd-bLDLlb9JumLljQ-tBEUQL9Ir_dL5WXpdhyLMPxydcdKI447ch-VuiESi3GrjaVrLML1vPg-84bQ')}
 
-
+curl --request POST --url https://joes-casting-agency.us.auth0.com/oauth/token --header 'content-type: application/json' --data '{"client_id":"JuRJnYtiGutFcvYN4Wtx2O1bynCd4Eoo" "client_secret":"rYCLRCHYTSRAJo4pT2c0Yw4freQpHaYYGZTgY9cZlc1pWq1z6Mf7LhlpD1SXMgwQ","audience":"CastingAgencyAPI","grant_type":"client_credentials"}'
 
 
 json:  {'title': 'Goonies', 'release_year': '1985', 'release_month': '6', 'release_day': '7', 'actors': ['1', '2', '3']}
@@ -144,3 +144,23 @@ https://pypi.org/project/pycodestyle/
 $ pip install pycodestyle
 $ pycodestyle --first <filename>
 
+
+
+deploy to heroku:
+heroku create <name_of_your_app>
+git remote add heroku <heroku_git_url>
+heroku addons:create heroku-postgresql:hobby-dev --app <name_of_your_app>  //add-on for db instance
+heroku config --app <name_of_your_app>
+
+
+Creating ⬢ casting-agent-app... done
+https://casting-agent-app.herokuapp.com/ | https://git.heroku.com/casting-agent-app.git
+=== casting-agent-app Config Vars
+DATABASE_URL: postgres://xibzplxukrsyqb:ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb@ec2-52-1-20-236.compute-1.amazonaws.com:5432/d23cmcbfab52ss
+
+Useful Heroku commands :
+
+heroku run bash - To see if files are there.
+heroku pg:psql - To get access to your PostgreSQL db.
+heroku pg:backups:capture --app your_app_name - To make a backup of your data
+heroku pg:backups:download - To download your backup

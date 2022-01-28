@@ -1,3 +1,4 @@
+# http response status codes and descriptions
 OK = 200
 BAD_REQUEST = 400
 BAD_REQUEST_MSG = "Bad Request"

@@ -22,6 +22,7 @@ While the back-end work is complete, minimal work was done on the front-end.  Th
 
 ## Technologies & Dependencies
 
+This app was developed on a Linux Ubuntu 20.04.3 LTS OS, hence all following commands listed in this readme will reflect this.
 The backend and API of this project was designed using Python and Flask.  
 Authentication was implemented using a third party authentication service, Auth0.  
 The application was deployed using Heroku.  
@@ -32,7 +33,8 @@ It can be installed usijng 'pip'
 ```
 pip install virtualenv
 ```
-All other required dependencies can be found in the file: requirements.txt
+All other required dependencies can be found in the file: requirements.txt  
+[Back to Top](#Casting-Agency)  
 
 ## Folders & File Descriptions
 
@@ -49,6 +51,8 @@ All other required dependencies can be found in the file: requirements.txt
 * `database/models.py` &emsp; - Python file defining the data models used to create the database tables.  
 * `migrations/` &emsp; - The Alembic database migration folder created using Python's Flask-Migrate library.  
 * `templates/` &emsp; - Folder containing html page files for the few front end pages.  
+
+[Back to Top](#Casting-Agency)  
 
 ## Project Setup
 1. Clone the project into a local directory, or fork the project and pull the copy:
@@ -72,7 +76,9 @@ source ./setup.sh
 flask run
 ```
 5. Check functionality in browser:
-Navigate to `http://127.0.0.1:5000/` or `http://127.0.0.1:5000/home`
+Navigate to `http://127.0.0.1:5000/` or `http://127.0.0.1:5000/home`  
+
+[Back to Top](#Casting-Agency)
 
 ## Running Tests:
 - Follow steps 1-3 in [Project Setup](#Project-Setup) if those steps have not been executed.
@@ -94,6 +100,8 @@ There are three roles that can be assigned to authenticated users.
   * `http://127.0.0.1:5000/home`  
   * `http://127.0.0.1:5000/dashboard` (after basic authentication with Auth0)  
   
+  [Back to Top](#Casting-Agency)  
+
 ## Front end pages and endpoints:
 `/home`  
   - This basic page shows a picture of a clapperboard and film reel along with the name of the app.  A log-in link is present.  
@@ -106,6 +114,8 @@ There are three roles that can be assigned to authenticated users.
 
 `/dashboard`
   - After log-in landing page that displays user's info along with links to other pages and /logout.  
+
+[Back to Top](#Casting-Agency)  
 
 ## API Endpoints
 A RESTful API was implemented.  It uses JSON to encode the responses and looks for JSON encoded data in POST and PATCH endpoints.  There are two main categories of endpoints: [Actors](#Actors), and [Movies](#Movies).  
@@ -352,6 +362,8 @@ DELETE '/movies/{int:movie_id}'
     "success": true
 }
 ```
+[Back to Top](#Casting-Agency)  
+
 ## Error Handling
 Errors are returned as JSON objects in the following format:
 ```
@@ -368,8 +380,9 @@ The API will return four error types when requests fail:
 - 404: Resource Not Found 
 - 405: Method Not Allowed
 - 422: Not Processable 
-- 500: Internal Server Error
+- 500: Internal Server Error  
 
+[Back to Top](#Casting-Agency)  
 
 ## Deployment to Heroku
 To deploy to heroku:
@@ -380,4 +393,6 @@ To deploy to heroku:
 5. Go to the heroku dashboard for your project, Select the Settings tab, Click on Reveal Config Vars, and add all necessary configuration variables such as the ones contained in the `setup.sh` file.  
 6. Run: `heroku config --app <name_of_your_app>` to check configurations variables.
 7. Push the repository code to Heroku: `git push heroku master`  
-8. Run database migrations: `heroku run python manage.py db upgrade --app name_of_your_application`  
+8. Run database migrations: `heroku run python manage.py db upgrade --app name_of_your_application`   
+
+[Back to Top](#Casting-Agency)  
