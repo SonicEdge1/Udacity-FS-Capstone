@@ -1,6 +1,6 @@
 # Casting Agency
 
-[Introduction](##Introduction) |
+[Introduction](#Introduction) |
 [Technologies & Dependencies](#Technologies-&-Dependencies) |
 [Folders & File Descriptions](#Folders-&-File-Descriptions) | 
 [Project Setup](#Project-Setup) |
@@ -75,7 +75,7 @@ flask run
 Navigate to `http://127.0.0.1:5000/` or `http://127.0.0.1:5000/home`
 
 ## Running Tests:
-- Follow steps 1-3 in [Project Setup](##Project-Setup) if those steps have not been executed.
+- Follow steps 1-3 in [Project Setup](#Project-Setup) if those steps have not been executed.
 - From the command line, run: `python3 test_app.py`  
 
 ## User Roles and Permissions  
@@ -108,7 +108,7 @@ There are three roles that can be assigned to authenticated users.
   - After log-in landing page that displays user's info along with links to other pages and /logout.  
 
 ## API Endpoints
-A RESTful API was implemented.  It uses JSON to encode the responses and looks for JSON encoded data in POST and PATCH endpoints.  There are two main categories of endpoints: [Actors](###Actors), and [Movies](###Movies).  
+A RESTful API was implemented.  It uses JSON to encode the responses and looks for JSON encoded data in POST and PATCH endpoints.  There are two main categories of endpoints: [Actors](#Actors), and [Movies](#Movies).  
 
 </br>
 GET '/'  
