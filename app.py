@@ -30,14 +30,14 @@ AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 SESSION_TYPE = 'sqlalchemy'
 SESSION_KEY = os.getenv('SESSION_KEY')
 SECRET_KEY = os.getenv('SECRET_KEY')
-database_filename = "database.db"
+# database_filename = "database.db"
 
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, template_folder='templates')
     # ???? is this the correct place for this?
-    setup_db(app, database_filename)
+    setup_db(app)
     app.secret_key = SECRET_KEY
 
     CORS(app)

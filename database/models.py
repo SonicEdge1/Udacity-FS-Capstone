@@ -19,7 +19,7 @@ Heroku_Host = "ec2-52-1-20-236.compute-1.amazonaws.com:5432"
 Heroku_DBname = "d23cmcbfab52ss"
 Heroku_User = "xibzplxukrsyqb"
 Heroku_Password = "ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb"
-Heroku_URI = "sqlite://xibzplxukrsyqb:ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb@ec2-52-1-20-236.compute-1.amazonaws.com:5432/d23cmcbfab52ss"
+Heroku_URI = "postgres://xibzplxukrsyqb:ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb@ec2-52-1-20-236.compute-1.amazonaws.com:5432/d23cmcbfab52ss"
 
 db = SQLAlchemy()
 '''
