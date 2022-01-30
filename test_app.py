@@ -30,7 +30,6 @@ class CastingAgencyTestCases(unittest.TestCase):
         self.database_path = "postgresql://{}:{}@{}/{}".format(
             'myuser', 'mypass', 'localhost:5432', self.database_name)
         setup_db(self.app, self.database_path)
-        # db.drop_all() // can't use this or tests stall out.
         db.drop_all()
         db.create_all()
 
