@@ -8,21 +8,19 @@ from datetime import date
 import codes as Codes
 from database.models import setup_db, Actor, Movie, actor_bookings, AuthError
 from auth.auth import AuthError, requires_auth, requires_basic_auth
-
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
-
 from dotenv import load_dotenv, find_dotenv
 from functools import wraps
 from os import environ as env
 
-
-
 AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
 AUTH0_API_BASE_URL = os.getenv('AUTH0_API_BASE_URL')
-AUTH0_CALLBACK_URL = os.getenv('AUTH0_REMOTE_CALLBACK_URL')  # comment this line to run loacally
-# AUTH0_CALLBACK_URL = os.getenv('AUTH0_CALLBACK_URL')       # uncomment this line for running locally
+# comment the line bleow to run loacally
+# AUTH0_CALLBACK_URL = os.getenv('AUTH0_REMOTE_CALLBACK_URL')
+# uncomment the line below for running locally
+AUTH0_CALLBACK_URL = os.getenv('AUTH0_CALLBACK_URL')
 AUTH0_API_AUDIENCE = os.getenv('AUTH0_API_AUDIENCE')
 
 
@@ -147,16 +145,16 @@ def create_app(test_config=None):
     @app.route('/actors', methods=['GET'])
     @requires_auth('get:actors-and-movies')
     def get_actors(payload):
-        # try:
-        all_actors = Actor.query.all()
-        actors = [actor.format() for actor in all_actors]
-        return jsonify({
-            'success': True,
-            'actors': actors,
-            'total_actors': len(Actor.query.all()),
-        }), Codes.OK
-        # except Exception as e:
-            # abort(Codes.UNPROCESSABLE_ENTITY)
+        try:
+            all_actors = Actor.query.all()
+            actors = [actor.format() for actor in all_actors]
+            return jsonify({
+                'success': True,
+                'actors': actors,
+                'total_actors': len(Actor.query.all()),
+            }), Codes.OK
+        except Exception as e:
+            abort(Codes.UNPROCESSABLE_ENTITY)
 
     @app.route('/actors/<int:actor_id>', methods=['GET'])
     @requires_auth('get:actors-and-movies')

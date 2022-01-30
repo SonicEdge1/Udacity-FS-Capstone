@@ -14,6 +14,19 @@ ___
 Capstone Project for the Udacity Full-Stack course  
 Heroku  Deployment Address: https://casting-agent-app.herokuapp.com/
 ___
+## REVIEWER CREDENTIALS
+Bearer Tokens for different roles can be found in setup.sh  
+Credentials that will allow the reviewer to log in to the app at various permissions:  
+* Executive Producer:  
+  UN: emailjoebell@gmail.com  
+  PW: Meonly123!
+* Casting Director:  
+  UN: onofskywalker74@netzero.net  
+  PW: Meonly123!  
+* Casting Assistant:  
+  UN: sandbox.bell@gmail.com  
+  PW: Meonly123!  
+---
 ## Introduction 
 
 Casting Agency is mostly a back-end designed for a Full-Stack application.  The app models a company that will create a collection of actors and movies, and then assign actors to the cast of those motion pictures.
@@ -55,44 +68,61 @@ All other required dependencies can be found in the file: requirements.txt
 [Back to Top](#Casting-Agency)  
 
 ## Project Setup
+1. Make sure the code is configured for local deployment.  
+   - comment line 21, and uncomment line 23 in `app.py`  
+   - comment lines 29-37 & uncomment lines 40-46 in `database/models.py`  
 1. Clone the project into a local directory, or fork the project and pull the copy:
-```
-git clone https://github.com/SonicEdge1/Udacity-FS-Capstone.git  
-cd Udacity-F5-Capstone   
-```
-2. Create a virtual environment & install Python libraries:
+    ```
+    git clone https://github.com/SonicEdge1/Udacity-FS-Capstone.git  
+    cd Udacity-F5-Capstone   
+    ```
+1. Create a virtual environment & install Python libraries:
 
-```
-python -m virtualenv env
-source env/bin/activate
-pip install -r requirements.txt
-```
-3. Set up environment variables.  The necessary environment variables are contained in the `setup.sh` file and can be applied to the console environment with:
-```
-source ./setup.sh
-```
-4. Start the app server:
-```
-flask run
-```
-5. Check functionality in browser:
+    ```
+    python -m virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
+    ```
+1. Set up environment variables.  The necessary environment variables are contained in the `setup.sh` file and can be applied to the console environment with:
+    ```
+    source ./setup.sh  
+    ```
+1. Set up the postgresql database(s) required.
+   - If the postgresql server needs installed and started, follow the instructions on the TablePlus page: https://tableplus.com/blog/2018/10/how-to-start-stop-restart-postgresql-server.html
+   - From the command line run:
+      ```
+      sudo -u postgres psql
+      ```
+    - With the command line displaying 'postgres=#', run:
+      ```
+      create database casting
+      create database casting_testdb
+      create user myuser with encrypted password 'mypass';
+      grant all privileges on database casting to myuser;
+      grant all privileges on database casting_testdb to myuser;
+      ```
+1. Start the app server:
+    ```
+    flask run
+    ```
+1. Check functionality in browser:
 Navigate to `http://127.0.0.1:5000/` or `http://127.0.0.1:5000/home`  
 
 [Back to Top](#Casting-Agency)
 
 ## Running Tests:
-- Follow steps 1-3 in [Project Setup](#Project-Setup) if those steps have not been executed.
+- Follow steps 1-5 in [Project Setup](#Project-Setup) if those steps have not been executed.
 - From the command line, run: `python3 test_app.py`  
 
 ## User Roles and Permissions  
 There are three roles that can be assigned to authenticated users.  
 1. The Casting Assistant  
    - Can view actors and movies  
-2. The Casting Director  
+1. The Casting Director  
    - Has all permissions a Casting Assistant has and…  
    - Can add or delete an actor from the database  
    - Can modify actors or movies  
-3. The Executive Producer  
+1. The Executive Producer  
    - Has all permissions a Casting Director has and…  
    - Can add or delete a movie from the database  
 * Those without an assigned role in Auth0 will only be able to access endpoints:
@@ -129,12 +159,12 @@ GET '/'
 * Curl: `curl --location --request GET 'https://casting-agent-app.herokuapp.com/actors' \
 --header 'Authorization: Bearer {BearerToken}'`
 * It simply returns:
-```
-{
-  "message": "Hello World", 
-  "success": true
-}
-```
+    ```
+    {
+      "message": "Hello World", 
+      "success": true
+    }
+    ```
 ### ACTORS
 GET '/actors'  
 
@@ -143,32 +173,32 @@ GET '/actors'
 * Request Body Data: none
 * Curl: `curl 'http://127.0.0.1:5000/actors' --header 'Authorization: Bearer {BearerToken}'`
 * Sample Return:
-```
-{
-    "actors": [
-        {
-            "age": 60,
-            "gender": "Male",
-            "id": 1,
-            "name": "Casey Siemaszko"
-        },
-        {
-            "age": 21,
-            "gender": "Male",
-            "id": 2,
-            "name": "Test Dummy"
-        },
-        {
-            "age": 63,
-            "gender": "Female",
-            "id": 4,
-            "name": "Andie MacDowell"
-        }
-    ],
-    "success": true,
-    "total_actors": 3
-}
-```
+    ```
+    {
+        "actors": [
+            {
+                "age": 60,
+                "gender": "Male",
+                "id": 1,
+                "name": "Casey Siemaszko"
+            },
+            {
+                "age": 21,
+                "gender": "Male",
+                "id": 2,
+                "name": "Test Dummy"
+            },
+            {
+                "age": 63,
+                "gender": "Female",
+                "id": 4,
+                "name": "Andie MacDowell"
+            }
+        ],
+        "success": true,
+        "total_actors": 3
+    }
+    ```
 GET '/actors/{int:actor_id}'  
 
 * Purpose: Returns a specific actor in the database along with all the movies they have been cast in.
@@ -176,84 +206,84 @@ GET '/actors/{int:actor_id}'
 * Request Body Data: none.
 * Curl: `curl 'http://127.0.0.1:5000/actors/1' --header 'Authorization: Bearer {BearerToken}'`
 * Sample Return:
-```
-{
-  "actor": {
-    "age": 90, 
-    "gender": "Male", 
-    "id": 2, 
-    "name": "Sean Connery"
-  }, 
-  "cast_in": [
+    ```
     {
-      "id": 6, 
-      "releaseDate": "1981-11-06", 
-      "title": "Time Bandits"
-    }, 
-    {
-      "id": 7, 
-      "releaseDate": "1996-06-07", 
-      "title": "The Rock"
+      "actor": {
+        "age": 90, 
+        "gender": "Male", 
+        "id": 2, 
+        "name": "Sean Connery"
+      }, 
+      "cast_in": [
+        {
+          "id": 6, 
+          "releaseDate": "1981-11-06", 
+          "title": "Time Bandits"
+        }, 
+        {
+          "id": 7, 
+          "releaseDate": "1996-06-07", 
+          "title": "The Rock"
+        }
+      ], 
+      "success": true
     }
-  ], 
-  "success": true
-}
-```
+    ```
 POST '/actors'  
 
 * Purpose: Adds an actor into the database. 
 * Permissions: A Casting Director Role or greater is required for access.
 * Request Body Data: An actor's name, age, and gender.
 * Curl: *note - replace the {BearerToken} variable with a vlaid token.
-```
-curl -X POST 'http://127.0.0.1:5000/actors' \
---header 'Authorization: Bearer {BearerToken} \
---header 'Content-Type: application/json' \
---data-raw '{
-    "name":"Andie MacDowell",
-    "age":"63",
-    "gender":"Female"
-}'
-```
-* Sample Return:
-```
-{
-    "added_actor": {
-        "age": 63,
-        "gender": "Female",
-        "id": 4,
-        "name": "Andie MacDowell"
-    },
-    "success": true,
-    "total_actors": 4
-}
-```
+    ```
+    curl -X POST 'http://127.0.0.1:5000/actors' \
+    --header 'Authorization: Bearer {BearerToken} \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "name":"Andie MacDowell",
+        "age":"63",
+        "gender":"Female"
+    }'
+      ```
+* Sample Return:  
+    ```
+    {
+        "added_actor": {
+            "age": 63,
+            "gender": "Female",
+            "id": 4,
+            "name": "Andie MacDowell"
+        },
+        "success": true,
+        "total_actors": 4
+    }
+    ```  
 PATCH '/actors/{int:actor_id}'  
 
 * Purpose: Update the actor's information in the database. 
 * Permissions: A Casting Director Role or greater is required for access.
 * Request Body Data: Any combination of an actor's name, age, or gender.  If no data is given, the request will return "success": true, along with the actor's original data.
 * Curl: *note - replace the {BearerToken} variable with a vlaid token.
-```
-curl -X PATCH 'http://127.0.0.1:5000/actors/1' \
---header 'Authorization: Bearer {Bearer_Token} \
---header 'Content-Type: application/json' \
---data-raw '{
-    "age": "57"
-}'
-```
+    ```
+    curl -X PATCH 'http://127.0.0.1:5000/actors/1' \
+    --header 'Authorization: Bearer {Bearer_Token} \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "age": "57"
+    }'
+    ```
 * Sample Return:
-```
-{
-    "actor": {
-        "age": 57,
-        "gender": "Male",
-        "id": 1,
-        "name": "Casey Siemaszko"
-    },
-    "success": true
-}
-```
+    ```
+    {
+        "actor": {
+            "age": 57,
+            "gender": "Male",
+            "id": 1,
+            "name": "Casey Siemaszko"
+        },
+        "success": true
+    }
+    ```
 DELETE '/actors/{int:actor_id}'
 
 * Purpose: Removes an actor from the database. 
@@ -261,13 +291,13 @@ DELETE '/actors/{int:actor_id}'
 * Request Body Data: none
 * Curl: `curl -X DELETE 'https://127.0.0.1:5000/actors/3' --header 'Authorization: {BearerToken}'`
 * Sample Return:
-```
-{
-    "deleted_actor_id": "3",
-    "deleted_actor_name": "Another Test Dummy",
-    "success": true
-}
-```
+    ```
+    {
+        "deleted_actor_id": "3",
+        "deleted_actor_name": "Another Test Dummy",
+        "success": true
+    }
+    ```
 ### Movies
 GET '/movies'
 
@@ -276,24 +306,24 @@ GET '/movies'
 * Request Body Data: none
 * Curl: `curl -X GET 'http://127.0.0.1:5000/movies' --header 'Authorization: Bearer {BearerToken}'`
 * Sample Return:
-```
-{
-    "movies": [
-        {
-            "id": 1,
-            "releaseDate": "1987-10-09",
-            "title": "Three O Clock High"
-        },
-        {
-            "id": 2,
-            "releaseDate": "1981-11-06",
-            "title": "Time Bandits"
-        }
-    ],
-    "success": true,
-    "total_movies": 2
-}
-```
+    ```
+    {
+        "movies": [
+            {
+                "id": 1,
+                "releaseDate": "1987-10-09",
+                "title": "Three O Clock High"
+            },
+            {
+                "id": 2,
+                "releaseDate": "1981-11-06",
+                "title": "Time Bandits"
+            }
+        ],
+        "success": true,
+        "total_movies": 2
+    }
+    ```
 GET '/movies/{int:movie_id}'  
 
 * Purpose: Returns a specific movie in the database along with the cast of that movie.
@@ -301,106 +331,106 @@ GET '/movies/{int:movie_id}'
 * Request Body Data: none.
 * Curl: `curl 'http://127.0.0.1:5000/movies/1' --header 'Authorization: Bearer {BearerToken}'`
 * Sample Return:
-```
-{
-  "movie": {
-    "id": 6, 
-    "releaseDate": "1981-11-06", 
-    "title": "Time Bandits"
-  }, 
-  "movie_cast": [
+    ```
     {
-      "age": 90, 
-      "gender": "Male", 
-      "id": 2, 
-      "name": "Sean Connery"
-    }, 
-    {
-      "age": 60, 
-      "gender": "Male", 
-      "id": 3, 
-      "name": "Jack Purvis"
-    }, 
-    {
-      "age": 51, 
-      "gender": "Female", 
-      "id": 4, 
-      "name": "Shelley Duvall"
-    }, 
-    {
-      "age": 60, 
-      "gender": "Male", 
-      "id": 5, 
-      "name": "John Cleese"
+      "movie": {
+        "id": 6, 
+        "releaseDate": "1981-11-06", 
+        "title": "Time Bandits"
+      }, 
+      "movie_cast": [
+        {
+          "age": 90, 
+          "gender": "Male", 
+          "id": 2, 
+          "name": "Sean Connery"
+        }, 
+        {
+          "age": 60, 
+          "gender": "Male", 
+          "id": 3, 
+          "name": "Jack Purvis"
+        }, 
+        {
+          "age": 51, 
+          "gender": "Female", 
+          "id": 4, 
+          "name": "Shelley Duvall"
+        }, 
+        {
+          "age": 60, 
+          "gender": "Male", 
+          "id": 5, 
+          "name": "John Cleese"
+        }
+      ], 
+      "success": true
     }
-  ], 
-  "success": true
-}
-```
+    ```
 PATCH '/moives/{int:movie_id}'  
 
 * Purpose: Updates the movie's information in the database. 
 * Permissions: A Casting Director Role or greater is required for access.
 * Request Body Data: Any combination of an movie's title, release_year and release_month and release_day, or actors list.  Note that if any value of the release date is missing, that the request will return a 400 error.  If an actor id that doesn't exist is added to the 'actors' list, then a 422 error will be returned. If no data is given, the request will return "success": true, along with the movie's original data.
 * Curl: *note - replace the {BearerToken} variable with a vlaid token.
-```
-curl -X PATCH 'http://127.0.0.1:5000/movies/4' \
---header 'Authorization: Bearer {Bearer_Token} \
---header 'Content-Type: application/json' \
---data-raw '{
-    "title": "Cloak and Dagger",
-    "actors": ["3","4"]
-}'
-```
+    ```
+    curl -X PATCH 'http://127.0.0.1:5000/movies/4' \
+    --header 'Authorization: Bearer {Bearer_Token} \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "title": "Cloak and Dagger",
+        "actors": ["3","4"]
+    }'
+    ```
 * Sample Return:
-```
-{
-    "movie": {
-        "id": 4,
-        "releaseDate": "1984-07-13",
-        "title": "Cloak and Dagger"
-    },
-    "movie_cast": [
-        {
-            "age": 57,
-            "gender": "Male",
-            "id": 1,
-            "name": "Casey Siemaszko"
-        }
-    ],
-    "success": true
-}
-```
+    ```
+    {
+        "movie": {
+            "id": 4,
+            "releaseDate": "1984-07-13",
+            "title": "Cloak and Dagger"
+        },
+        "movie_cast": [
+            {
+                "age": 57,
+                "gender": "Male",
+                "id": 1,
+                "name": "Casey Siemaszko"
+            }
+        ],
+        "success": true
+    }
+    ```
 POST '/movies'  
 
 * Purpose: Adds a movie into the database. 
 * Permissions: An Executive Producer Role or greater is required for access.
 * Request Body Data: The Movie's title, release_year, release_month, and release_day are all required.  The actors id list is optional.
 * Curl: *note - replace the {BearerToken} variable with a vlaid token.
-```
-curl -X POST 'http://127.0.0.1:5000/movies' \
---header 'Authorization: Bearer {BearerToken} \
---header 'Content-Type: application/json' \
---data-raw '{
-    "title":"The Last Starfighter",
-    "release_year":"1984",
-    "release_month":"7",
-    "release_day":"13",
-}'
-```
+    ```
+    curl -X POST 'http://127.0.0.1:5000/movies' \
+    --header 'Authorization: Bearer {BearerToken} \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "title":"The Last Starfighter",
+        "release_year":"1984",
+        "release_month":"7",
+        "release_day":"13",
+    }'
+    ```
 * Sample Return:
-```
-{
-    "added_movie": {
-        "id": 3,
-        "releaseDate": "1984-07-13",
-        "title": "The Last Starfighter"
-    },
-    "movie_cast": [],
-    "success": true,
-    "total_movies": 3
-}
-```
+    ```
+    {
+        "added_movie": {
+            "id": 3,
+            "releaseDate": "1984-07-13",
+            "title": "The Last Starfighter"
+        },
+        "movie_cast": [],
+        "success": true,
+        "total_movies": 3
+    }
+    ```
 DELETE '/movies/{int:movie_id}'
 
 * Purpose: Removes an actor from the database. 
@@ -408,13 +438,13 @@ DELETE '/movies/{int:movie_id}'
 * Request Body Data: none
 * Curl: `curl -X DELETE 'https://127.0.0.1:5000/movies/3' --header 'Authorization: {BearerToken}'`
 * Sample Return:
-```
-{
-    "deleted_movie_id": 3,
-    "deleted_movie_title": "The Last Starfighter3",
-    "success": true
-}
-```
+    ```
+    {
+        "deleted_movie_id": 3,
+        "deleted_movie_title": "The Last Starfighter3",
+        "success": true
+    }
+    ```
 [Back to Top](#Casting-Agency)  
 
 ## Error Handling
@@ -439,13 +469,36 @@ The API will return four error types when requests fail:
 
 ## Deployment to Heroku
 To deploy to heroku:
+1. Prep Code for remote deployment.
+   - uncomment line 21, and comment line 23 in `app.py`  
+   - uncomment lines 29-37 & comment lines 40-46 in `database/models.py`  
 1. Make sure the heroku cli is installed: `curl https://cli-assets.heroku.com/install-ubuntu.sh | sh` - or - `sudo snap install --classic heroku`  
-2. Create your app with the cli: `heroku create <name_of_your_app> `  
-3. Add the heroku git url to your repository: `git remote add heroku <heroku_git_url> `  
-4. Add the postgresql add-on for the database: `heroku addons:create heroku-postgresql:hobby-dev --app <name_of_your_app>`  
-5. Go to the heroku dashboard for your project, Select the Settings tab, Click on Reveal Config Vars, and add all necessary configuration variables such as the ones contained in the `setup.sh` file.  
-6. Run: `heroku config --app <name_of_your_app>` to check configurations variables.
-7. Push the repository code to Heroku: `git push heroku master`  
-8. Run database migrations: `heroku run python manage.py db upgrade --app name_of_your_application`   
+1. Create your app with the cli: `heroku create <name_of_your_app> `  
+1. Add the heroku git url to your repository: `git remote add heroku <heroku_git_url> `  
+1. Add the postgresql add-on for the database: `heroku addons:create heroku-postgresql:hobby-dev --app <name_of_your_app>`  
+1. Go to the heroku dashboard for your project, Select the Settings tab, Click on Reveal Config Vars, and add all necessary configuration variables such as the ones contained in the `setup.sh` file.  
+1. Run: `heroku config --app <name_of_your_app>` to check configurations variables.
+1. Push the repository code to Heroku: `git push heroku master`  
+1. Run database migrations: `heroku run python manage.py db upgrade --app <name_of_your_app>`   
+1. Confirm deployment by visiting https://<name_if_your_app>.herokuapp.com/
 
+### Useful Heroku commands :
+`heroku run bash` - Opens shell in Heroku environment to navigate uploaded files.  
+`heroku pg:psql` - Accesses the deployed PostgreSQL db.  
+`heroku pg:backups:capture <name_of_your_app>` - Creates a backup file of the database data.  
+`heroku pg:backups:download` - Downloads the backup data file.  
 [Back to Top](#Casting-Agency)  
+
+## PEP 8 Styling
+* Code was partially auto-stylized using autopep8  
+  https://pypi.org/project/autopep8/  
+  ```
+  pip install --upgrade autopep8
+  autopep8 --in-place --aggressive --aggressive <filename>
+  ```
+* Code was tested for sytle compliance using pycodestyle  
+  https://pypi.org/project/pycodestyle/  
+  ```
+  pip install pycodestyle
+  pycodestyle --first <filename>
+  ```

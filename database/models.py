@@ -9,42 +9,25 @@ from sqlalchemy.orm import backref, relationship
 from enum import Enum
 from sqlalchemy.sql.sqltypes import Date
 
+HEROKU_URI = os.getenv('HEROKU_URI')
 
 migrate = Migrate()
-
-project_dir = os.path.dirname(os.path.abspath(__file__))
-# database_filename = "database.db"
-
-Heroku_Host = "ec2-52-1-20-236.compute-1.amazonaws.com:5432"
-Heroku_DBname = "d23cmcbfab52ss"
-Heroku_User = "xibzplxukrsyqb"
-Heroku_Password = "ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb"
-Heroku_URI = "postgres://xibzplxukrsyqb:ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb@ec2-52-1-20-236.compute-1.amazonaws.com:5432/d23cmcbfab52ss"
-
 db = SQLAlchemy()
+
+database_port = "localhost:5432"
+database_name = "casting"
+database_path = "postgresql://{}:{}@{}/{}".format(
+  'myuser',
+  'mypass',
+  database_port,
+  database_name)
+
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-def setup_db(app, database_path=Heroku_URI):
-#     database_path = "sqlite:///{}".format(
-#        Heroku_User,
-#        Heroku_Password,
-#        Heroku_Host,
-#        Heroku_DBname
-#    )
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    db.app = app
-    db.init_app(app)
-    # migrate.init_app(app, db)
-    Migrate(app, db)
-    # db.create_all()
-
-## Local db settings
-# def setup_db(app, database_filename=database_filename):
-#     database_path = "sqlite:///{}".format(
-#         os.path.join(project_dir, database_filename))
+# # remote db settings
+# def setup_db(app, database_path=HEROKU_URI):
 #     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
 #     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 #     db.app = app
@@ -52,6 +35,15 @@ def setup_db(app, database_path=Heroku_URI):
 #     # migrate.init_app(app, db)
 #     Migrate(app, db)
 #     # db.create_all()
+
+
+# Local db settings
+def setup_db(app, database_path=database_path):
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.app = app
+    db.init_app(app)
+    Migrate(app, db)
 
 
 actor_bookings = db.Table('actor_bookings',
@@ -83,7 +75,6 @@ class Actor(db.Model):
     '''
     __tablename__ = 'actors'
 
-    # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     name = Column(String(80), unique=True, nullable=False)
     age = Column(Integer(), nullable=False)
@@ -103,7 +94,6 @@ class Actor(db.Model):
             actor =Actor(name=req_name, age=req_age, gender=req_gender)
             actor.insert()
     '''
-
     def insert(self):
         db.session.add(self)
         db.session.commit()
@@ -116,7 +106,6 @@ class Actor(db.Model):
             actor =Actor(name=req_name, age=req_age, gender=req_gender)
             actor.delete()
     '''
-
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -130,7 +119,6 @@ class Actor(db.Model):
             actor.name = 'Casey Siemaszko'
             actor.update()
     '''
-
     def update(self):
         db.session.commit()
 
@@ -138,7 +126,6 @@ class Actor(db.Model):
     format()
         representation of the Actor model
     '''
-
     def format(self):
         return {
             'id': self.id,
@@ -184,7 +171,6 @@ class Movie(db.Model):
             movie = Movie(title=req_title, releaseDate=req_relaeseDate)
             movie.insert()
     '''
-
     def insert(self):
         db.session.add(self)
         db.session.commit()
@@ -197,7 +183,6 @@ class Movie(db.Model):
             movie = Movie(title=req_title, releaseDate=req_releaseDate)
             movie.delete()
     '''
-
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -211,7 +196,6 @@ class Movie(db.Model):
             movie.title = 'Three O'Clock High'
             movie.update()
     '''
-
     def update(self):
         db.session.commit()
 
@@ -219,7 +203,6 @@ class Movie(db.Model):
     format()
         representation of the Movie model
     '''
-
     def format(self):
         return {
             'id': self.id,

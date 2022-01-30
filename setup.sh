@@ -1,8 +1,4 @@
 #!/bin/bash
-export FLASK_ENV=development
-export FLASK_APP=app.py
-export FLASK_DEBUG=true
-
 export AUTH0_ALGORITHMS=['RS256']
 export AUTH0_API_AUDIENCE='CastingAgencyAPI'  #when setting up in heroku, leave off the ''
 export AUTH0_API_BASE_URL=https://joes-casting-agency.us.auth0.com
@@ -11,6 +7,12 @@ export AUTH0_CLIENT_ID=OhcNdLC90mi5E0R77RlC526RP1Khrl7q
 export AUTH0_CLIENT_SECRET='aRBc0oGvvYq2tLDk89736MFh4Kky68yoPWNvYYGKSJVsaD97bkesz4tE_mUS1dso' #when setting up in heroku, leave off the ''
 export AUTH0_DOMAIN=joes-casting-agency.us.auth0.com
 export AUTH0_REMOTE_CALLBACK_URL=https://casting-agent-app.herokuapp.com/callback
+
+export FLASK_ENV=development
+export FLASK_APP=app.py
+export FLASK_DEBUG=true
+
+export HEROKU_URI='postgres://xibzplxukrsyqb:ac5916d7271da41c21c3695491e47d3595ba31c5a1ee644413715e097320bfdb@ec2-52-1-20-236.compute-1.amazonaws.com:5432/d23cmcbfab52ss'
 
 export SECRET_KEY='aRBc0oGvvYq2VsaD97bkesz4tE_mUS1dso' #when setting up in heroku, leave off the ''
 export SESSION_KEY="access_token" #when setting up in heroku, leave off the ""
