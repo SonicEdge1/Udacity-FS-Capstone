@@ -20,7 +20,7 @@ For security concerns, Log-in Credentials have been removed post project eval.
 All users have been removed from authentication app.  
 Database Credentials have been rotated.  
 https://devcenter.heroku.com/articles/heroku-postgresql-credentials#pg-credentials-rotate  
-*Note that for future projects, it would be best to submit credentials in the submission notes instead of a repo, and needed environment variables given in the README.md without disclosing them in the setup.sh.  That file should have been included in the .gitignore.*
+*Note that for future projects, it would be best to submit credentials in the submission notes, or by using a service such as https://privatebin.net/ instead of a repo, and needed environment variables given in the README.md without disclosing them in the setup.sh.  That setup.sh file should have been included in the .gitignore.*
 ___
 ## Introduction 
 
